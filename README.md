@@ -223,3 +223,117 @@ Kekurangan K-Nearest Neightbor (KNN) :
 
 
 ## Evaluation
+Metrik evaluasi digunakan untuk menilai seberapa baik performa suatu model dalam menjalankan tugasnya, baik dalam konteks klasifikasi maupun klastering. Dalam proyek ini, beberapa metrik evaluasi yang digunakan antara lain:
+
+### 1. Precision
+Precision digunakan dalam konteks klasifikasi untuk mengukur proporsi prediksi positif yang benar-benar relevan. Metrik ini penting untuk mengetahui seberapa akurat model dalam mengidentifikasi kelas positif dibandingkan dengan semua prediksi positif yang dibuat.
+  
+Precision merupakan salah satu metrik evaluasi yang penting dalam menilai kinerja model, khususnya dalam konteks klasifikasi atau pengelompokan berbasis label. Precision mengukur proporsi prediksi positif yang benar dari keseluruhan prediksi positif yang dibuat oleh model. Nilai precision yang tinggi menunjukkan bahwa model memiliki tingkat kesalahan rendah dalam mengklasifikasikan data sebagai positif, sehingga hasil prediksi positif dapat dianggap lebih akurat dan dapat dipercaya. Dengan demikian, precision sangat membantu dalam mengevaluasi ketepatan model dalam mengenali data yang relevan dari seluruh prediksi positif yang dihasilkan[[7](https://esairina.medium.com/memahami-confusion-matrix-accuracy-precision-recall-specificity-dan-f1-score-610d4f0db7cf)].
+
+Rumus Presisi Ditulis seperti ini :
+
+$$Presisi = \frac{TP}{TP + FP}$$
+
+dimana: 
+- True Positive (TP): Jumlah data yang diklasifikasikan sebagai positif oleh model, dan memang benar-benar termasuk dalam kelas positif.
+- False Positive (FP): Jumlah data yang diklasifikasikan sebagai positif oleh model, namun sebenarnya termasuk dalam kelas negatif.
+
+Interpretasi Hasil Presisi Berdasarkan Tabel 1:
+
+Berdasarkan Tabel 1. Hasil Pengujian Model Content Based Filtering (dengan Filter Genres), diketahui bahwa nilai presisi model untuk rekomendasi Top-5 adalah sempurna, yakni 5 dari 5 atau 100%. Artinya, semua rekomendasi yang diberikan oleh model merupakan anime yang memiliki genre serupa dengan anime Naruto, seperti Action, Adventure, Comedy, Drama, Fantasy, Shounen, dan Super Power.
+
+Presisi yang tinggi ini mengindikasikan bahwa model memiliki performa yang sangat baik dalam mengidentifikasi item yang relevan sesuai preferensi pengguna. Lima rekomendasi teratas yang dihasilkan model terbukti konsisten dalam menyajikan anime dengan genre yang sama atau sangat mirip dengan Naruto. Dengan demikian, model Content Based Filtering ini efektif dalam membantu pengguna menemukan tontonan yang sesuai dengan minat mereka.
+
+### 2. Skor Calinski-Harabasz
+Metrik ini digunakan untuk mengevaluasi hasil dari algoritma klastering. Semakin tinggi nilai Calinski-Harabasz, semakin baik performa klastering, karena menunjukkan bahwa klaster yang terbentuk memiliki jarak antar klaster yang besar dan kepadatan internal klaster yang tinggi.
+
+Calinski-Harabasz Score merupakan salah satu metrik evaluasi yang digunakan untuk menilai kualitas hasil pengelompokan (clustering). Metrik ini mengukur seberapa baik algoritma pengelompokan dalam memisahkan data ke dalam kelompok-kelompok yang padat (kompak) di dalam masing-masing cluster, sekaligus saling berjauhan (terpisah) antar cluster.
+
+Skor ini dihitung sebagai rasio antara sebaran antar cluster (antara pusat cluster) terhadap sebaran dalam cluster (antar data di dalam cluster yang sama). Semakin tinggi nilai Calinski-Harabasz (CH), semakin baik hasil pengelompokan tersebut. Kelebihan utama dari metrik ini adalah tidak memerlukan label kebenaran dasar (ground truth), sehingga sangat cocok untuk digunakan dalam metode unsupervised learning seperti clustering.[[9](https://medium.com/@haataa/how-to-measure-clustering-performances-when-there-are-no-ground-truth-db027e9a871c)]
+
+Rumus Skor Calinski-Harabasz adalah:
+
+$$CH = \frac{B}{W} \times \frac{N - k}{k - 1}$$
+
+Penjelasan :
+- B = menyatakan variabilitas antar klaster (between-cluster variance).
+- W = menunjukkan variabilitas di dalam masing-masing klaster (within-cluster variance).
+- N = merepresentasikan total jumlah data yang dianalisis.
+- k = menggambarkan jumlah klaster yang terbentuk dalam proses pengelompokan.
+
+Untuk melakukan pengujian pada model, digunakan kode berikut.
+```python
+calinski_harabasz_score(data_baru, animedata_name)
+```
+Dan didapatkan score dari pengujian model.
+```
+3.1613291729405617
+```
+
+Hasil evaluasi menunjukkan bahwa pemisahan antar kluster dalam model ini belum optimal, yang ditunjukkan oleh nilai skor Calinski-Harabasz (CH) yang relatif rendah, yaitu sebesar 3.161. Nilai CH yang rendah mengindikasikan bahwa data dalam masing-masing kluster belum cukup kompak dan antar kluster belum cukup terpisah.
+
+Kondisi ini dapat menyebabkan sistem merekomendasikan aplikasi yang kurang relevan dengan preferensi pengguna, karena pengelompokan yang dilakukan belum mencerminkan struktur data yang jelas. Oleh karena itu, perlu dilakukan evaluasi ulang terhadap parameter model atau metode fitur yang digunakan agar pemisahan kluster dapat ditingkatkan dan kualitas rekomendasi menjadi lebih akurat.
+
+
+### 3. Skor Davies-Bouldin
+Davies-Bouldin Index mengukur rasio antara jarak dalam klaster dan jarak antar klaster. Nilai yang lebih rendah menunjukkan klaster yang lebih baik karena berarti klaster tersebut lebih terpisah dan lebih kompak.
+
+Davies-Bouldin Score adalah metrik evaluasi untuk menilai kualitas hasil pengelompokan dalam algoritma clustering. Metrik ini mengukur rata-rata tingkat kemiripan antara setiap klaster dengan klaster paling mirip lainnya. Kemiripan ini dihitung berdasarkan rasio antara sebaran dalam klaster (intra-cluster distance) dan jarak antar klaster (inter-cluster distance).
+
+Skor DB memiliki nilai minimum 0, di mana nilai yang lebih rendah menunjukkan performa pengelompokan yang lebih baik. Skor yang rendah mengindikasikan bahwa klaster-klaster yang terbentuk:
+
+- Memiliki jarak yang jauh antar satu sama lain (baik pemisahan antar klaster),
+- Dan memiliki penyebaran data yang kompak dalam masing-masing klaster.
+Sama seperti Silhouette Score, Davies-Bouldin Score tidak memerlukan label kebenaran dasar (ground truth), sehingga cocok digunakan untuk mengevaluasi model unsupervised learning. Dengan formulasi yang lebih sederhana, metrik ini memberikan cara yang efisien untuk menilai kinerja model pengelompokan secara objektif.[[10](https://ieeexplore.ieee.org/document/4766909)]
+
+Rumus dari Skor Davies-Bouldin adalah:
+
+
+$$ DB = \frac{1}{k} \sum_{i=1}^{k} \max_{j \neq i} \left( \frac{R_i + R_j}{d(c_i, c_j)} \right) $$
+
+
+Di mana:
+- k: Jumlah total klaster yang terbentuk.
+- R_i Ukuran penyebaran (radius) dari klaster ke-i, biasanya dihitung sebagai rata-rata jarak antara tiap titik dalam klaster ke pusatnya.
+- d(c_i, c_j) Jarak antara pusat klaster i dan pusat klaster j.
+
+Davies-Bouldin Score (DB) didefinisikan sebagai rata-rata dari nilai-nilai R untuk semua klaster dalam hasil pengelompokan. Nilai R ini merepresentasikan rasio antara sebaran dalam klaster (intra-cluster dispersion) dan jarak antar pusat klaster (inter-cluster distance).
+
+Untuk melakukan pengujian model, digunakan potongan kode berikut.
+```python
+davies_bouldin_score(data_baru, animedata_name)
+```
+Dan didapatkan skor dari pengujian model.
+```python
+0.7864266764751376
+```
+
+Evaluasi menggunakan metrik Davies-Bouldin (DB) menghasilkan skor sebesar 0.7864266764751376, yang tergolong cukup rendah. Nilai ini menunjukkan bahwa model telah berhasil membentuk klaster dengan tingkat pemisahan yang cukup baik antar kelompok data. Dengan demikian, dapat disimpulkan bahwa kualitas pengelompokan yang dihasilkan model cukup efektif dalam memisahkan data berdasarkan kemiripan fitur.
+
+Kondisi ini berkontribusi positif terhadap akurasi sistem rekomendasi, yang mampu menghasilkan daftar anime yang relevan dengan preferensi pengguna. Artinya, model mampu mengelompokkan data dengan baik dan mendasari hasil rekomendasi yang sesuai dengan karakteristik anime yang disukai pengguna.
+
+Metrik-metrik ini memberikan gambaran menyeluruh terhadap kinerja model dari sisi akurasi prediksi dan kualitas pemisahan data dalam tugas klastering.
+
+
+
+# Referensi
+
+1. https://id.wikipedia.org/wiki/Anime#:~:text=4.2%20Bacaan%20terkait-,Definisi%20dan%20penggunaan,animasi%20yang%20dibuat%20di%20Jepang%22.
+
+2. https://openlibrarypublications.telkomuniversity.ac.id/index.php/engineering/article/view/20612/19925
+
+3. https://journal.mediapublikasi.id/index.php/logic/article/view/4299
+
+4. https://www.researchgate.net/publication/274712918_Rekomendasi_Anime_dengan_Latent_Semantic_Indexing_Berbasis_Sinopsis_Genre
+
+5. http://repository.uin-malang.ac.id/18842/1/18842.pdf
+
+6. https://medium.com/geekculture/cosine-similarity-and-cosine-distance-48eed889a5c4
+
+7. https://medium.com/bee-solution-partners/cara-kerja-algoritma-k-nearest-neighbor-k-nn-389297de543e
+
+8. https://esairina.medium.com/memahami-confusion-matrix-accuracy-precision-recall-specificity-dan-f1-score-610d4f0db7cf
+
+9. https://medium.com/@haataa/how-to-measure-clustering-performances-when-there-are-no-ground-truth-db027e9a871c
+
+10. https://ieeexplore.ieee.org/document/4766909
