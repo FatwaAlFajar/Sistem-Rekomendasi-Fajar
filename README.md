@@ -116,7 +116,7 @@ Sedangkan pada Gambar 4, yang menampilkan Top 10 Anime dengan Rating Tertinggi, 
 
 Data ini juga dapat dijadikan acuan dalam sistem rekomendasi, karena anime dengan rating tinggi umumnya mencerminkan kualitas cerita dan penerimaan yang baik oleh pengguna. Makin banyak pengguna yang memberikan rating, makin besar kemungkinan bahwa anime tersebut populer dan layak ditonton.
 
-### Data Preparation
+## Data Preparation
 Pada tahap Data Preparation, dilakukan text cleaning untuk membersihkan teks dari tanda baca dan tautan (URL). Untuk menangani missing value, digunakan metode dropping dengan fungsi drop(). Alasan penggunaan metode ini adalah karena data yang dihapus tidak memberikan pengaruh signifikan terhadap performa model. Awalnya, dataset berjumlah 14.952 entri, dan setelah menghapus data yang memiliki missing value, jumlah data tersisa menjadi 13.229 entri.
 
 Dalam membangun sistem rekomendasi pada proyek ini, digunakan beberapa fitur utama, yaitu: ***Name, Score, Genres, Type, dan Studios.***
@@ -124,7 +124,7 @@ Dalam membangun sistem rekomendasi pada proyek ini, digunakan beberapa fitur uta
 - Untuk sistem rekomendasi menggunakan metode Collaborative Filtering, atribut yang digunakan meliputi Name, Score, dan Type.
 Selain itu, dilakukan juga proses one-hot encoding pada fitur Type dan Score untuk mengubah variabel kategorikal menjadi format numerik yang dapat diproses oleh model pembelajaran mesin.
 
-### Modelling
+## Modelling
 Pada proyek ini, hanya digunakan dua model, yaitu Cosine Similarity dan K-Nearest Neighbor (KNN). Kedua algoritma ini digunakan untuk mengukur tingkat kesamaan antar data berdasarkan fitur-fitur yang tersedia. Model akan mempelajari kemiripan antar entri dalam dataset guna menghasilkan sistem rekomendasi yang relevan.
 
 #### Cosine Similarity
