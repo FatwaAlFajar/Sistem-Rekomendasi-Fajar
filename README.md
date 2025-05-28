@@ -132,7 +132,7 @@ Cosine Similarity adalah sebuah metode yang digunakan untuk mengukur tingkat kem
 - Nilai 1 menunjukkan bahwa kedua vektor memiliki arah yang sama (sangat mirip),
 - Nilai 0 menunjukkan bahwa kedua vektor tegak lurus (tidak memiliki hubungan),
 - Nilai -1 menunjukkan arah yang sepenuhnya berlawanan (sangat tidak mirip).
-Metode ini umum digunakan dalam bidang pemrosesan teks dan pengelompokan data untuk menentukan tingkat kemiripan antar dokumen atau antar fitur dalam suatu dataset [6](https://medium.com/geekculture/cosine-similarity-and-cosine-distance-48eed889a5c4).
+Metode ini umum digunakan dalam bidang pemrosesan teks dan pengelompokan data untuk menentukan tingkat kemiripan antar dokumen atau antar fitur dalam suatu dataset [[6](https://medium.com/geekculture/cosine-similarity-and-cosine-distance-48eed889a5c4)]
 
 Rumus Cosine Similarity dituliskan dalam : 
 
@@ -153,5 +153,73 @@ anime_recommendations('Naruto')
 | Boruto Jump Festa 2016 Special                   |Action, Adventure, Comedy, Super Power                        |
 | Naruto Shippuuden                                |Action, Adventure, Comedy, Super Power                        |
 | Rekka no Honoo                                   |Action, Adventure, Martial Arts, Shounen                      |
-| One Piece Episode of East Blue  Luffy to 4 nin no Nakama no Daibouken| Action, Adventure, Comedy, Drama, Fantasy, Shounen, Super Power.  |
-| One Piece Episode of Sabo  3 Kyoudai no Kizuna Kiseki no Saikai to Uketsugareru Ishi| Action, Adventure, Comedy, Drama, Fantasy, Shounen, Super Power   |
+| Naruto Honoo no Chuunin Shiken Naruto vs Konoh...|Action, Adventure, Martial Arts, Shounen,                     |
+| Naruto Shippuuden Movie 6 Road to Ninja	         |Action, Adventure, Super Power, Martial Arts                  |
+
+Table 1. Hasil Pengujian Model Content Based Filtering (dengan Filter Genres).
+
+Berdasarkan Tabel 1, hasil pengujian model Content-Based Filtering (berdasarkan Genre) menunjukkan bahwa sistem berhasil merekomendasikan 5% anime teratas yang paling mirip dengan Naruto. Rekomendasi ini mencakup beberapa seri dan film yang masih berada dalam waralaba Naruto itu sendiri. Artinya, ketika seorang pengguna menyukai Naruto, sistem mampu menyarankan seri atau film lain yang masih memiliki keterkaitan erat.
+
+Pendekatan ini bekerja dengan cara mengidentifikasi kemiripan dalam atribut genre antara Naruto dan anime lainnya, sehingga pengguna dapat menerima rekomendasi konten yang relevan dengan preferensi mereka. Dengan demikian, sistem mampu membantu pengguna menemukan tontonan lain yang sejalan dengan ketertarikan mereka terhadap Naruto.
+
+Kelebihan Cosine Similarity : 
+  - Efisiensi Perhitungan: Memiliki kompleksitas yang rendah, sehingga sangat efisien digunakan dalam proses komputasi, terutama pada skala besar.
+  - Tangguh terhadap Dimensi Tinggi: Cocok diterapkan pada dataset berdimensi tinggi karena metode ini fokus pada arah vektor, bukan pada jumlah dimensi data.
+
+Kekurangan Cosine Similarity:
+  - Mengabaikan Besarnya Nilai (Magnitudo): Hanya mempertimbangkan arah vektor dan tidak memperhitungkan besarannya. 
+  - Rentan terhadap Nilai Ekstrem: Dua vektor dengan magnitudo yang sangat berbeda tetap dapat dianggap mirip jika memiliki arah yang sama, meskipun secara nilai sesungguhnya cukup jauh.
+
+## K-Nearest Neighbor
+K-Nearest Neighbor (KNN) merupakan salah satu algoritma paling sederhana dalam klasifikasi dan regresi. Metode ini bekerja dengan mengklasifikasikan suatu data berdasarkan kedekatannya terhadap sejumlah data tetangga terdekat dalam ruang fitur. Jumlah tetangga yang diperhitungkan ditentukan oleh parameter K. Semakin dekat jarak antara data baru dengan data dalam kelompok tertentu, maka semakin besar kemungkinan data baru tersebut termasuk ke dalam kelompok tersebut.
+
+Sebagai contoh, jika K = 1, maka klasifikasi dilakukan berdasarkan satu tetangga terdekat saja—artinya data baru akan diberi label yang sama dengan data yang paling mirip atau paling dekat jaraknya.[[7](https://medium.com/bee-solution-partners/cara-kerja-algoritma-k-nearest-neighbor-k-nn-389297de543e)]
+
+K-Nearest Neighbor dituliskan dalam rumus:
+
+ $$Euclidean Distance (P, Q) = sqrt(∑(Pi - Qi)^2)$$
+
+dimana:
+- Pi merepresentasikan nilai fitur ke-i dari titik data P.
+- Qi merepresentasikan nilai fitur ke-i dari titik data Q, yang merupakan bagian dari kumpulan data D.
+- ∑ adalah simbol yang digunakan untuk menjumlahkan seluruh nilai fitur dari data yang dibandingkan.
+
+Hasil Pengujian Model K-Nearest Neighbor (KNN) menggunakan Euclidean Distance:
+
+Jika pengguna menyukai anime Neon Genesis Evangelion: Death & Rebirth, maka sistem merekomendasikan beberapa anime lain yang memiliki kemiripan berdasarkan kedekatan jarak fitur, antara lain:
+
+Berikut ini adalah aplikasi yang juga mungkin akan disukai :
+| Anime Name                                   | Similarity Score |
+|----------------------------------------------|------------------|
+| Neon Genesis Evangelion Death Rebirth        | 100.0%           |
+| Neon Genesis Evangelion The End of Evangelion| 98.94%           |
+| Kekkaishi TV                                 | 98.59%           |
+| Doraemon Doraemon Comes Back                 | 98.59%           |
+| Dr Slump Aralechan                           | 98.59%           |
+
+Tabel 2. Hasil Pengujian Model K-Nearest Neighbor
+
+Berdasarkan Tabel 2, model K-Nearest Neighbor (KNN) menghasilkan rekomendasi anime yang memiliki kemiripan berdasarkan fitur-fitur seperti Name, Score, Type, dan Studios. Ketika pengguna menyukai anime Neon Genesis Evangelion: Death & Rebirth, model berhasil memberikan rekomendasi anime yang dinilai serupa berdasarkan pola data yang telah dipelajari.
+
+Rekomendasi yang dihasilkan meliputi :
+- Neon Genesis Evangelion: Death & Rebirth (100.00%)
+- Neon Genesis Evangelion: The End of Evangelion (98.94%)
+- Kekkaishi (TV) (98.59%)
+- Doraemon: Doraemon Comes Back (98.59%)
+- Dr. Slump: Arale-chan (98.59%)
+Persentase yang tercantum menunjukkan tingkat kemiripan relatif dari masing-masing anime terhadap anime acuan. Hasil ini menunjukkan bahwa model KNN dapat secara efektif mengidentifikasi dan merekomendasikan anime-anime dengan karakteristik yang serupa. Pendekatan ini sangat membantu pengguna dalam menemukan konten yang relevan dan sesuai dengan preferensi mereka berdasarkan anime yang telah disukai sebelumnya.
+
+Kelebihan K-Nearest Neighbor (KNN):
+1. Waktu pelatihan yang sangat cepat
+2. Algoritma yang sederhana dan mudah dipahami
+3. Tahan terhadap data pelatihan yang mengandung noise
+4. Efektif pada dataset berukuran besar
+
+Kekurangan K-Nearest Neightbor (KNN) :
+1. Penentuan nilai k menjadi bias dalam model.
+2. Komputasi yang kompleks, terutama pada data besar atau dimensi fitur tinggi.
+3. Keterbatasan memori karena harus menyimpan semua data pelatihan.
+4. Rentan terhadap atribut yang tidak relevan yang dapat memengaruhi hasil klasifikasi.
+
+
+## Evaluation
