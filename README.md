@@ -120,9 +120,10 @@ Data ini juga dapat dijadikan acuan dalam sistem rekomendasi, karena anime denga
 Pada tahap Data Preparation, dilakukan text cleaning untuk membersihkan teks dari tanda baca dan tautan (URL). Untuk menangani missing value, digunakan metode dropping dengan fungsi drop(). Alasan penggunaan metode ini adalah karena data yang dihapus tidak memberikan pengaruh signifikan terhadap performa model. Awalnya, dataset berjumlah 14.952 entri, dan setelah menghapus data yang memiliki missing value, jumlah data tersisa menjadi 13.229 entri.
 
 Dalam membangun sistem rekomendasi pada proyek ini, digunakan beberapa fitur utama, yaitu: ***Name, Score, Genres, Type, dan Studios.***
-- Untuk sistem rekomendasi berbasis genre, atribut yang digunakan adalah Name dan Genres.
-- Untuk sistem rekomendasi menggunakan metode Collaborative Filtering, atribut yang digunakan meliputi Name, Score, dan Type.
-Selain itu, dilakukan juga proses one-hot encoding pada fitur Type dan Score untuk mengubah variabel kategorikal menjadi format numerik yang dapat diproses oleh model pembelajaran mesin.
+- Untuk sistem rekomendasi berbasis genre, atribut yang digunakan adalah *Name* dan *Genres*.
+- Untuk sistem rekomendasi menggunakan metode Collaborative Filtering, atribut yang digunakan meliputi *Name, Score*, dan *Type*.
+- Selain itu, dilakukan juga proses **one-hot encoding** pada fitur *Type* dan *Studios* untuk mengubah variabel kategorikal menjadi format numerik yang dapat diproses oleh model pembelajaran mesin.
+- Khusus pada sistem Content-Based Filtering, dilakukan **TF-IDF Vectorization** pada fitur *Genres*. TF-IDF digunakan untuk mengubah teks genre menjadi vektor numerik berbasis frekuensi, yang kemudian digunakan untuk menghitung tingkat kemiripan antar anime menggunakan Cosine Similarity.
 
 ## Modelling
 Pada proyek ini, hanya digunakan dua model, yaitu Cosine Similarity dan K-Nearest Neighbor (KNN). Kedua algoritma ini digunakan untuk mengukur tingkat kesamaan antar data berdasarkan fitur-fitur yang tersedia. Model akan mempelajari kemiripan antar entri dalam dataset guna menghasilkan sistem rekomendasi yang relevan.
