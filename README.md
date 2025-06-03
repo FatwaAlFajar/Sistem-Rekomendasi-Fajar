@@ -15,7 +15,7 @@ Sistem rekomendasi anime berpotensi memberikan berbagai manfaat signifikan, baik
 
 ## Problem Statements
 - Bagaimana membangun sistem rekomendasi anime yang menyarankan tontonan kepada pengguna dengan mengacu pada genre yang diminati?
-- Bagaimana penyedia layanan streaming dapat menyarankan anime yang belum pernah ditonton oleh pengguna dengan memanfaatkan data penilaian yang telah diberikan?
+- Bagaimana penyedia layanan streaming dapat menyarankan anime dengan genre yang sama dengan judul yang sebelumnya ditonton?
 - Bagaimana membangun model rekomendasi menggunakan pendekatan Cosine Similarity?
 
 ## Goals
