@@ -132,7 +132,7 @@ Dataframe ini memiliki total sebanyak 25 kolom.
   7. On-Hold
   8. Dropped.
 
-Walaupun dataset ini menyediakan banyak fitur, hanya lima di antaranya yang akan difokuskan dalam pembuatan model sistem rekomendasi sederhana, yaitu:
+Walaupun dataset ini menyediakan banyak fitur, hanya dua di antaranya yang akan difokuskan dalam pembuatan model sistem rekomendasi sederhana, yaitu:
 1. Name
 2. Genres
 
